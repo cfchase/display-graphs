@@ -1,0 +1,11 @@
+
+module my-systemd 1.0;
+
+require {
+	type snappy_var_lib_t;
+	type init_t;
+	class lnk_file read;
+}
+
+#============= init_t ==============
+allow init_t snappy_var_lib_t:lnk_file read;
