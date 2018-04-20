@@ -1,10 +1,9 @@
 import * as React from 'react';
-import PlotlyGraph from "../components/PlotlyGraph";
+import Graph from "../components/Graph";
 
 const Home = () => (
   <div className="Home">
-    <h1>Current Graph</h1>
-    <PlotlyGraph />
+    <Graph />
   </div>
 );
 

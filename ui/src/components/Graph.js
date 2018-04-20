@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Plot from 'react-plotly.js';
-import { getGraph } from "../actions/graph";
 import { connect } from "react-redux";
+import Plot from 'react-plotly.js';
+import Vega from 'react-vega';
+import { getGraph } from "../actions/graph";
 
-class PlotlyGraph extends React.Component {
+class Graph extends React.Component {
   componentDidMount() {
     this.props.init();
   }
@@ -11,23 +12,30 @@ class PlotlyGraph extends React.Component {
   render() {
 
     let graph = <p>No graph</p>;
+    let title = null;
     if (this.props.graphLoading) {
       graph = <p>Loading...</p>;
     } else if (this.props.error) {
       graph = <p>Error: {JSON.stringify(this.props.error)}</p>
-    } else if (this.props.graph) {
+    } else if (this.props.graph && this.props.graphType === "plotly") {
+      title = "Plotly Graph";
       graph = (
         <Plot
           data={this.props.graph.data}
           layout={this.props.graph.layout}
         />
       )
+    } else if (this.props.graph && this.props.graphType === "vega") {
+      title = "Vega Graph";
+      graph = <Vega spec={this.props.graph} />;
     }
 
 
     return (
       <div>
         <div>
+          <h1>{title}</h1>
+
           <button
             id="updateGraphButton"
             type="button"
@@ -62,4 +70,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlotlyGraph);
+export default connect(mapStateToProps, mapDispatchToProps)(Graph);
