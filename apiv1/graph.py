@@ -1,4 +1,5 @@
 from flask import jsonify, request
+from flask_socketio import emit
 from apiv1 import apiv1
 from pprint import pprint
 import random
@@ -32,7 +33,7 @@ def _generate_test_graph():
             }
         }
     }
-    
+
     trace2 = {
         "x": x2,
         "name": 'Middle',
@@ -106,5 +107,10 @@ def save_graph():
     # pprint(request.get_json())
     global current_graph
     current_graph = request.get_json()
+    broadcast_msg = {
+        'type': 'graph',
+        'id': 'none'
+    }
+    emit('update', broadcast_msg, namespace='/notifications', broadcast=True)
     return jsonify(current_graph)
 

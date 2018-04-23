@@ -1,16 +1,31 @@
 import * as React from 'react';
 import { connect } from "react-redux";
+import io from "socket.io-client"
 import Plot from 'react-plotly.js';
 import Vega from 'react-vega';
+
 import { getGraph } from "../actions/graph";
+
+import './Graph.css';
 
 class Graph extends React.Component {
   componentDidMount() {
     this.props.init();
+    this.socket = io.connect("/notifications");
+    console.log("Connecting Socket as component mounts");
+
+    this.socket.on('update',(res)=>{
+      console.dir(res);
+      this.props.init();
+    })
+  }
+
+  componentWillUnmount() {
+    this.socket.disconnect();
+    console.log("Disconnecting Socket as component will unmount")
   }
 
   render() {
-
     let graph = <p>No graph</p>;
     let title = null;
     if (this.props.graphLoading) {
@@ -32,21 +47,8 @@ class Graph extends React.Component {
 
 
     return (
-      <div>
-        <div>
-          <h1>{title}</h1>
-
-          <button
-            id="updateGraphButton"
-            type="button"
-            onClick={e => {
-              this.props.click(e);
-            }}
-          >
-            Update Graph
-          </button>
-        </div>
-
+      <div className="Graph">
+        <h1>{title}</h1>
         {graph}
       </div>
     );

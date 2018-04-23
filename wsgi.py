@@ -1,8 +1,10 @@
 import os
 from flask import send_from_directory
 from factory import create_app
+from flask_socketio import SocketIO
 
 application = create_app(__name__)
+socketio = SocketIO(application)
 
 
 # Serve UI static files
@@ -19,4 +21,4 @@ def serve(path):
 
 
 if __name__ == "__main__":
-    application.run()
+    socketio.run(application)
