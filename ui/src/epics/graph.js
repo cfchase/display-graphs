@@ -8,7 +8,7 @@ import {
 export function graphEpic(action$) {
   return action$.ofType(TYPE_GET_GRAPH).switchMap(action$ =>
     Observable.ajax
-      .getJSON('/api/v1/graph')
+      .getJSON(`/api/v1/graphs/${action$.payload.params.key}`)
       .map(graph => getGraphSucceeded(graph))
       .catch(error => Observable.of(getGraphFailed(error)))
   );

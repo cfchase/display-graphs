@@ -62,11 +62,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     init: () => {
-      dispatch(getGraph());
+      dispatch(getGraph({key: "current"}))
     },
     click: (e) => {
       e.preventDefault();
-      dispatch(getGraph());
+      dispatch(getGraph({key: "current"}));
     }
   };
 }

@@ -1,7 +1,7 @@
 export const TYPE_GET_GRAPH = 'GET_GRAPH';
-export const getGraph = () => ({
+export const getGraph = (params) => ({
   type: TYPE_GET_GRAPH,
-  payload: {}
+  payload: {params}
 });
 
 export const TYPE_GET_GRAPH_SUCCEEDED = 'GET_GRAPH_SUCCEEDED';

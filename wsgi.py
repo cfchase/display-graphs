@@ -1,15 +1,17 @@
 import os
 from flask import send_from_directory
-from factory import create_app
 from flask_socketio import SocketIO
+from app import create_app
+from app.models import *
+from app.schemas import *
 
-application = create_app(__name__)
-socketio = SocketIO(application)
+app = create_app(__name__)
+socketio = SocketIO(app)
 
 
 # Serve UI static files
-@application.route('/', defaults={'path': ''})
-@application.route('/<path:path>')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 def serve(path):
     if path == "":
         return send_from_directory('ui/build', 'index.html')
@@ -21,4 +23,9 @@ def serve(path):
 
 
 if __name__ == "__main__":
-    socketio.run(application)
+    socketio.run(app)
+
+
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'Graph': Graph, 'GraphSchema': GraphSchema}
