@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Home from './pages/Home'
-import NotFound from "./pages/NotFound";
+import NotFound from './pages/NotFound';
 
 export const Routes = () => (
   <Switch>

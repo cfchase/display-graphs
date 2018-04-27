@@ -8,4 +8,5 @@ class GraphSchema(ma.ModelSchema):
 
 
 graph_schema = GraphSchema()
-graphs_schema = GraphSchema(many=True, only=('id', 'key', 'type'))
+# graphs_schema = GraphSchema(many=True, only=('id', 'label', 'type'))
+graphs_schema = GraphSchema(many=True)

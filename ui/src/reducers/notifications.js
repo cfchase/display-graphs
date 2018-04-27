@@ -11,13 +11,10 @@ const initialState = {
 export const notificationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case TYPE_CONNECT_NOTIFICATIONS:
-      console.log('TYPE_CONNECT_NOTIFICATIONS');
       return {};
-    case 'TICKER_TICK':
-      console.log('TICKER_TICK');
+    case TYPE_DISCONNECT_NOTIFICATIONS:
       return {};
-    case 'CLOSE_TICKER_STREAM':
-      console.log('CLOSE_TICKER_STREAM');
+    case TYPE_RECEIVE_NOTIFICATION:
       return {};
     default:
       return state;

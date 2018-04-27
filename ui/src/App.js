@@ -15,32 +15,19 @@ class App extends Component {
       case 'Home':
         this.props.history.push('/');
         break;
-      case 'Route 2':
-        this.props.history.push('/route2');
-        break;
-      case 'Route 3':
-        this.props.history.push('/route3');
-        break;
       default:
         console.log('Unrecognized navbar item clicked');
     }
   };
 
-
   render() {
     return (
       <div className="App">
         <VerticalNav>
-          <VerticalNav.Masthead title="Demo App" />
+          <VerticalNav.Masthead title="Jupyter Viz" />
           <VerticalNav.Item
             title="Home"
             iconClass="fa fa-dashboard"
-            onClick={this.handleNavClick}
-            className={null}
-          />
-          <VerticalNav.Item
-            title="Route 2"
-            iconClass="fa fa-star"
             onClick={this.handleNavClick}
             className={null}
           />

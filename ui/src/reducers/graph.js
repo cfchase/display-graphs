@@ -5,6 +5,7 @@ import {
 } from "../actions/graph";
 
 const initialState = {
+  graphs: [],
   graphType: null,
   graph: null,
   graphLoading: false,
@@ -12,7 +13,6 @@ const initialState = {
 };
 
 export const graphReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case TYPE_GET_GRAPH:
       return {
@@ -28,7 +28,7 @@ export const graphReducer = (state = initialState, action) => {
         error: null
       };
     case TYPE_GET_GRAPH_FAILED:
-      console.log(action.payload.error);
+      console.error(action.payload.error);
       return {
         ...state,
         graphType: null,
